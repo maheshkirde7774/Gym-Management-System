@@ -1,0 +1,44 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+<!-- Hero Section -->
+<section class="hero-section text-center d-flex align-items-center justify-content-center" style="min-height: 80vh; background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.9)), url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop') center/cover;">
+    <div class="container px-4">
+        <h1 class="display-2 fw-black text-white text-uppercase mb-4 shadow-sm" style="font-weight: 900; letter-spacing: 2px;">Transform Your Body<br><span class="text-warning">Transform Your Life</span></h1>
+        <p class="lead text-light mb-5 fs-4">Join the city's most elite fitness facility today.</p>
+        <a href="{{ url_for('public.membership') }}" class="btn btn-warning btn-lg rounded-pill px-5 py-3 fw-bold text-uppercase me-3 hover-scale">Join Now</a>
+        <a href="{{ url_for('public.about') }}" class="btn btn-outline-light btn-lg rounded-pill px-5 py-3 fw-bold text-uppercase hover-scale">Learn More</a>
+    </div>
+</section>
+
+<!-- Features -->
+<section class="py-5 bg-black">
+    <div class="container py-5">
+        <div class="row g-4 text-center">
+            <div class="col-md-4">
+                <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                    <i class="bi bi-cpu text-warning display-4 mb-3"></i>
+                    <h3 class="fw-bold">Modern Equipment</h3>
+                    <p class="text-secondary">State-of-the-art machines and free weights for optimal results.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                    <i class="bi bi-people text-warning display-4 mb-3"></i>
+                    <h3 class="fw-bold">Expert Trainers</h3>
+                    <p class="text-secondary">Certified professionals to guide you every step of the way.</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                    <i class="bi bi-clock-history text-warning display-4 mb-3"></i>
+                    <h3 class="fw-bold">24/7 Access</h3>
+                    <p class="text-secondary">Train whenever you want with our round-the-clock facility.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+{% endblock %}

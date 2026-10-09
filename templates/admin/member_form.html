@@ -1,0 +1,66 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="row justify-content-center">
+    <div class="col-lg-8">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h2 class="text-white fw-bold mb-0">{{ 'Edit' if member else 'Add New' }} Member</h2>
+            <a href="{{ url_for('members.list_members') }}" class="btn btn-outline-secondary rounded-pill">
+                <i class="bi bi-arrow-left me-2"></i>Back to Members
+            </a>
+        </div>
+        
+        <div class="card bg-dark text-white border-0 shadow rounded-4">
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="row g-3">
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">First Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control bg-black border-secondary text-white" name="first_name" value="{{ member.first_name if member else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Last Name <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control bg-black border-secondary text-white" name="last_name" value="{{ member.last_name if member else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Email <span class="text-danger">*</span></label>
+                            <input type="email" class="form-control bg-black border-secondary text-white" name="email" value="{{ member.email if member else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Phone Number <span class="text-danger">*</span></label>
+                            <input type="text" class="form-control bg-black border-secondary text-white" name="phone" value="{{ member.phone if member else '' }}" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Date of Birth</label>
+                            <input type="date" class="form-control bg-black border-secondary text-white" name="dob" value="{{ member.dob if member and member.dob else '' }}">
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Gender</label>
+                            <select class="form-select bg-black border-secondary text-white" name="gender">
+                                <option value="">Select Gender</option>
+                                <option value="Male" {% if member and member.gender == 'Male' %}selected{% endif %}>Male</option>
+                                <option value="Female" {% if member and member.gender == 'Female' %}selected{% endif %}>Female</option>
+                                <option value="Other" {% if member and member.gender == 'Other' %}selected{% endif %}>Other</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="form-label text-secondary fw-bold">Address</label>
+                            <textarea class="form-control bg-black border-secondary text-white" name="address" rows="3">{{ member.address if member else '' }}</textarea>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="form-label text-secondary fw-bold">Join Date</label>
+                            <input type="date" class="form-control bg-black border-secondary text-white" name="join_date" value="{{ member.join_date if member else '' }}">
+                        </div>
+                        
+                        <div class="col-12 mt-4 text-end">
+                            <button type="submit" class="btn btn-warning fw-bold px-4 py-2 rounded-pill shadow-sm">
+                                <i class="bi bi-save me-2"></i> Save Member
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

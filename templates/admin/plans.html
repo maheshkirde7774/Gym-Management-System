@@ -1,0 +1,37 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold mb-0">Membership Plans</h2>
+    <a href="{{ url_for('plans.add_plan') }}" class="btn btn-warning fw-bold rounded-pill shadow-sm">
+        <i class="bi bi-plus-circle-fill me-2"></i>Create Plan
+    </a>
+</div>
+
+<div class="row g-4">
+    {% for plan in plans %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card bg-dark text-white border-0 shadow rounded-4 h-100 position-relative {% if not plan.is_active %}opacity-75{% endif %}">
+            {% if not plan.is_active %}
+            <div class="position-absolute top-0 end-0 bg-danger text-white px-3 py-1 rounded-start-pill mt-3 shadow-sm fs-7">INACTIVE</div>
+            {% endif %}
+            <div class="card-body p-4 text-center">
+                <h4 class="card-title fw-bold mb-3">{{ plan.name }}</h4>
+                <div class="display-5 fw-bold text-warning mb-3">
+                    ${{ "%.0f"|format(plan.price) }}
+                </div>
+                <div class="badge bg-secondary mb-4 rounded-pill px-3 py-2">
+                    <i class="bi bi-calendar me-1"></i> {{ plan.duration_months }} Months
+                </div>
+                <p class="text-secondary small mb-4">{{ plan.description }}</p>
+                <a href="{{ url_for('plans.edit_plan', id=plan.id) }}" class="btn btn-outline-warning w-100 rounded-pill">Edit Plan</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <p class="text-secondary">No membership plans found. Create one to get started.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

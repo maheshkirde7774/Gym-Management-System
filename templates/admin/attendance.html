@@ -1,0 +1,84 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="row g-4">
+    <!-- Mark Attendance -->
+    <div class="col-lg-4">
+        <div class="card bg-dark text-white border-0 shadow rounded-4 mb-4">
+            <div class="card-header border-secondary border-opacity-25 bg-transparent pt-4 pb-3">
+                <h5 class="fw-bold mb-0">Mark Attendance</h5>
+            </div>
+            <div class="card-body p-4">
+                <form method="POST">
+                    <div class="mb-3">
+                        <label class="form-label text-secondary fw-bold">Member ID <span class="text-danger">*</span></label>
+                        <div class="input-group">
+                            <span class="input-group-text bg-black border-secondary text-secondary"><i class="bi bi-person-badge"></i></span>
+                            <input type="text" class="form-control bg-black border-secondary text-white" name="member_id" placeholder="GYM-XXXXXX" required autofocus>
+                        </div>
+                    </div>
+                    
+                    <div class="row g-3 mb-4">
+                        <div class="col-6">
+                            <label class="form-label text-secondary fw-bold">Date</label>
+                            <input type="date" class="form-control bg-black border-secondary text-white" name="date" value="{{ today }}" readonly>
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label text-secondary fw-bold">Time In <span class="text-danger">*</span></label>
+                            <input type="time" class="form-control bg-black border-secondary text-white" name="time_in" required>
+                            <script>
+                                const now = new Date();
+                                const timeStr = now.getHours().toString().padStart(2, '0') + ':' + now.getMinutes().toString().padStart(2, '0');
+                                document.querySelector('input[name="time_in"]').value = timeStr;
+                            </script>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn btn-warning w-100 fw-bold py-2 rounded-pill shadow-sm">
+                        <i class="bi bi-clock-history me-2"></i> Mark Present
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Today's Attendance List -->
+    <div class="col-lg-8">
+        <div class="card bg-dark text-white border-0 shadow rounded-4 h-100">
+            <div class="card-header border-secondary border-opacity-25 bg-transparent pt-4 pb-3 d-flex justify-content-between align-items-center">
+                <h5 class="fw-bold mb-0">Today's Attendance ({{ records|length }})</h5>
+                <span class="badge bg-secondary">{{ today.strftime('%B %d, %Y') }}</span>
+            </div>
+            <div class="card-body p-0">
+                <div class="table-responsive">
+                    <table class="table table-dark table-hover mb-0 align-middle">
+                        <thead class="table-active">
+                            <tr>
+                                <th class="px-4 py-3">Time In</th>
+                                <th class="py-3">Member ID</th>
+                                <th class="py-3">Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for record in records %}
+                            <tr>
+                                <td class="px-4"><span class="badge bg-success"><i class="bi bi-clock me-1"></i> {{ record.time_in.strftime('%I:%M %p') }}</span></td>
+                                <td><small class="text-warning fw-bold">{{ record.member.member_id }}</small></td>
+                                <td class="fw-bold">{{ record.member.full_name }}</td>
+                            </tr>
+                            {% else %}
+                            <tr>
+                                <td colspan="3" class="text-center py-5 text-secondary">
+                                    <i class="bi bi-journal-x display-4 d-block mb-3"></i>
+                                    No attendance recorded today.
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

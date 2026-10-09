@@ -1,0 +1,89 @@
+/* Global Styles */
+:root {
+    --primary-color: #ffc107;
+    --dark-color: #121212;
+    --darker-color: #0a0a0a;
+}
+
+body {
+    font-family: 'Inter', 'Roboto', sans-serif;
+    background-color: var(--darker-color) !important;
+}
+
+.bg-black {
+    background-color: var(--darker-color) !important;
+}
+
+.bg-dark {
+    background-color: var(--dark-color) !important;
+}
+
+/* Hover effects */
+.hover-lift {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.hover-lift:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5) !important;
+}
+
+.hover-scale {
+    transition: transform 0.2s ease;
+}
+
+.hover-scale:hover {
+    transform: scale(1.05);
+}
+
+.hover-warning:hover {
+    color: var(--primary-color) !important;
+}
+
+.hover-bg-secondary:hover {
+    background-color: rgba(255,255,255,0.1);
+}
+
+/* Custom Table Styles */
+.table-dark {
+    --bs-table-bg: transparent;
+    --bs-table-striped-bg: rgba(255, 255, 255, 0.05);
+    --bs-table-striped-color: #fff;
+    --bs-table-active-bg: rgba(255, 255, 255, 0.1);
+    --bs-table-active-color: #fff;
+    --bs-table-hover-bg: rgba(255, 255, 255, 0.075);
+    --bs-table-hover-color: #fff;
+    color: #fff;
+    border-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Form Controls */
+.form-control:focus, .form-select:focus {
+    background-color: #000;
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.25rem rgba(255, 193, 7, 0.25);
+    color: #fff;
+}
+
+::placeholder {
+    color: #6c757d !important;
+    opacity: 1;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--darker-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333;
+    border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: var(--primary-color);
+}

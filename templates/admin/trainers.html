@@ -1,0 +1,40 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold mb-0">Trainers</h2>
+    <a href="{{ url_for('trainers.add_trainer') }}" class="btn btn-warning fw-bold rounded-pill shadow-sm">
+        <i class="bi bi-person-plus-fill me-2"></i>Add Trainer
+    </a>
+</div>
+
+<div class="row g-4">
+    {% for trainer in trainers %}
+    <div class="col-md-6 col-lg-4">
+        <div class="card bg-dark text-white border-0 shadow rounded-4 h-100 position-relative {% if not trainer.is_active %}opacity-75{% endif %}">
+            {% if not trainer.is_active %}
+            <div class="position-absolute top-0 end-0 bg-danger text-white px-3 py-1 rounded-start-pill mt-3 shadow-sm fs-7">INACTIVE</div>
+            {% endif %}
+            <div class="card-body p-4 text-center">
+                <div class="bg-secondary bg-opacity-25 rounded-circle d-inline-flex align-items-center justify-content-center mb-3" style="width: 80px; height: 80px;">
+                    <i class="bi bi-person-badge-fill fs-1 text-warning"></i>
+                </div>
+                <h4 class="card-title fw-bold mb-1">{{ trainer.full_name }}</h4>
+                <p class="text-warning fw-bold mb-3">{{ trainer.specialization }}</p>
+                
+                <div class="d-flex justify-content-center gap-3 text-secondary small mb-4">
+                    <span><i class="bi bi-telephone me-1"></i> {{ trainer.phone }}</span>
+                    <span><i class="bi bi-award me-1"></i> {{ trainer.experience_years }} yrs</span>
+                </div>
+                
+                <a href="{{ url_for('trainers.edit_trainer', id=trainer.id) }}" class="btn btn-outline-light btn-sm w-100 rounded-pill">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+    {% else %}
+    <div class="col-12 text-center py-5">
+        <p class="text-secondary">No trainers found. Create one to get started.</p>
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}

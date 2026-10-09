@@ -1,0 +1,76 @@
+{% extends 'admin/base_admin.html' %}
+
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-4">
+    <h2 class="text-white fw-bold mb-0">Members</h2>
+    <a href="{{ url_for('members.add_member') }}" class="btn btn-warning fw-bold rounded-pill shadow-sm">
+        <i class="bi bi-person-plus-fill me-2"></i>Add Member
+    </a>
+</div>
+
+<div class="card bg-dark text-white border-0 shadow rounded-4 mb-4">
+    <div class="card-body">
+        <form action="{{ url_for('members.list_members') }}" method="GET" class="d-flex">
+            <div class="input-group">
+                <span class="input-group-text bg-black border-secondary text-secondary"><i class="bi bi-search"></i></span>
+                <input type="text" name="search" value="{{ search }}" class="form-control bg-black border-secondary text-white" placeholder="Search by name or Member ID...">
+                <button class="btn btn-outline-warning" type="submit">Search</button>
+                {% if search %}
+                <a href="{{ url_for('members.list_members') }}" class="btn btn-outline-secondary">Clear</a>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="card bg-dark text-white border-0 shadow rounded-4">
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-dark table-hover mb-0 align-middle">
+                <thead class="table-active">
+                    <tr>
+                        <th class="px-4 py-3">Member ID</th>
+                        <th class="py-3">Name</th>
+                        <th class="py-3">Contact</th>
+                        <th class="py-3">Status</th>
+                        <th class="py-3 text-end px-4">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for member in members %}
+                    <tr>
+                        <td class="px-4"><span class="badge bg-secondary">{{ member.member_id }}</span></td>
+                        <td>
+                            <div class="fw-bold">{{ member.full_name }}</div>
+                            <small class="text-secondary">Joined: {{ member.join_date.strftime('%Y-%m-%d') }}</small>
+                        </td>
+                        <td>
+                            <div><i class="bi bi-telephone text-secondary me-1"></i> {{ member.phone }}</div>
+                            <small class="text-secondary"><i class="bi bi-envelope me-1"></i> {{ member.email }}</small>
+                        </td>
+                        <td>
+                            {% if member.is_active %}
+                            <span class="badge bg-success rounded-pill px-3 py-2"><i class="bi bi-check-circle me-1"></i> Active</span>
+                            {% else %}
+                            <span class="badge bg-danger rounded-pill px-3 py-2"><i class="bi bi-x-circle me-1"></i> Expired/None</span>
+                            {% endif %}
+                        </td>
+                        <td class="text-end px-4">
+                            <a href="{{ url_for('members.profile', id=member.id) }}" class="btn btn-sm btn-info rounded-pill px-3"><i class="bi bi-eye"></i> View</a>
+                            <a href="{{ url_for('members.edit_member', id=member.id) }}" class="btn btn-sm btn-outline-warning rounded-pill px-3 ms-1"><i class="bi bi-pencil"></i></a>
+                        </td>
+                    </tr>
+                    {% else %}
+                    <tr>
+                        <td colspan="5" class="text-center py-5 text-secondary">
+                            <i class="bi bi-inbox display-4 d-block mb-3"></i>
+                            No members found.
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock %}

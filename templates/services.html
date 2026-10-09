@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Our Services{% endblock %}
+
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-4 fw-bold text-warning text-uppercase">Our Services</h1>
+        <p class="lead text-secondary">Comprehensive fitness solutions designed for your success.</p>
+    </div>
+
+    <div class="row g-4 text-center">
+        <div class="col-md-4">
+            <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                <i class="bi bi-person-video text-warning display-4 mb-3"></i>
+                <h3 class="fw-bold text-white">Personal Training</h3>
+                <p class="text-secondary">One-on-one sessions tailored specifically to your goals and abilities.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                <i class="bi bi-people text-warning display-4 mb-3"></i>
+                <h3 class="fw-bold text-white">Group Classes</h3>
+                <p class="text-secondary">High-energy group workouts including HIIT, spinning, and yoga.</p>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="p-4 bg-dark rounded-4 shadow hover-lift h-100 border border-secondary border-opacity-25">
+                <i class="bi bi-heart-pulse text-warning display-4 mb-3"></i>
+                <h3 class="fw-bold text-white">Nutrition Advice</h3>
+                <p class="text-secondary">Dietary guidance to complement your training and maximize results.</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
